@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Adventure NZ - Discover New Zealand</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=1.0.0" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"
@@ -198,9 +198,23 @@
       <p>&copy; 2024 Adventure NZ</p>
     </footer>
 
-    <script defer src="script.js"></script>
+    <script defer src="script.js?v=1.0.0"></script>
     <div id="lightbox" class="lightbox" style="display: none">
       <img id="lightbox-img" />
     </div>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker
+            .register('/service-worker.js')
+            .then((registration) => {
+              console.log('Service Worker registered with scope:', registration.scope);
+            })
+            .catch((error) => {
+              console.error('Service Worker registration failed:', error);
+            });
+        });
+      }
+    </script>
   </body>
 </html>
